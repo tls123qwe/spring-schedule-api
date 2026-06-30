@@ -2,6 +2,7 @@ package com.example.schedulesmanager.service;
 
 import com.example.schedulesmanager.dto.CreatRequest;
 import com.example.schedulesmanager.dto.CreatResponse;
+import com.example.schedulesmanager.dto.GetResponse;
 import com.example.schedulesmanager.entity.Schedule;
 import com.example.schedulesmanager.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,7 @@ public class ScheduleService {
                 request.getWriter(),
                 request.getTitle(),
                 request.getContents(),
-                request.getPassword()
-        );
+                request.getPassword());
 
         Schedule savedSchedule = scheduleRepository.save(schedule);
 
@@ -33,6 +33,21 @@ public class ScheduleService {
                 savedSchedule.getContents(),
                 savedSchedule.getCreatedAt(),
                 savedSchedule.getModifiedAt()
+        );
+    }
+
+    @Transactional(readOnly = true)
+    public GetResponse getOne(Long id) {
+        Schedule schedule = scheduleRepository.findById(id).orElseThrow(
+                () -> new IllegalStateException("없는 일정입니다."));
+
+        return new GetResponse(
+                schedule.getId(),
+                schedule.getWriter(),
+                schedule.getTitle(),
+                schedule.getContents(),
+                schedule.getCreatedAt(),
+                schedule.getModifiedAt()
         );
     }
 }
