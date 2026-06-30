@@ -1,8 +1,6 @@
 package com.example.schedulesmanager.controller;
 
-import com.example.schedulesmanager.dto.CreatRequest;
-import com.example.schedulesmanager.dto.CreatResponse;
-import com.example.schedulesmanager.dto.GetResponse;
+import com.example.schedulesmanager.dto.*;
 import com.example.schedulesmanager.repository.ScheduleRepository;
 import com.example.schedulesmanager.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
@@ -32,11 +30,15 @@ public class scheduleController {
 
     @GetMapping("/schedules")
     public ResponseEntity<List<GetResponse>> getAllSchedules(@RequestParam(required = false) String writer) {
-
         if (writer == null) {
             return ResponseEntity.status(HttpStatus.OK).body(scheduleService.findAll());
         }
-
         return ResponseEntity.status(HttpStatus.OK).body(scheduleService.findByWriter(writer));
     }
+
+    @PutMapping("/schedlues/{id}")
+    public ResponseEntity<UpdateResponse> updateSchedule(@PathVariable Long id, @RequestBody UpdateRequest request){
+        return ResponseEntity.status(HttpStatus.OK).body(scheduleService.updateSchedule(id, request));
+    }
+
 }
