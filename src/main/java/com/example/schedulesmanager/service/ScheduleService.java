@@ -92,6 +92,10 @@ public class ScheduleService {
         Schedule schedule = scheduleRepository.findById(id).orElseThrow(
                 () -> new IllegalStateException("없는 일정입니다."));
 
+        if (!schedule.getPassword().equals(request.getPassword())){
+            throw new IllegalArgumentException("비밀번호가 일지하지 않습니다.");
+        }
+
         schedule.updateSchedule(
                 request.getWriter(),
                 request.getTitle(),

@@ -7,4 +7,5 @@ public class UpdateRequest {
     private String writer;
     private String title;
     private String contents;
+    private String password;
 }
