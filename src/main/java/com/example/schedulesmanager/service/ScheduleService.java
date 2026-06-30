@@ -1,0 +1,38 @@
+package com.example.schedulesmanager.service;
+
+import com.example.schedulesmanager.dto.CreatRequest;
+import com.example.schedulesmanager.dto.CreatResponse;
+import com.example.schedulesmanager.entity.Schedule;
+import com.example.schedulesmanager.repository.ScheduleRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+
+public class ScheduleService {
+
+    private final ScheduleRepository scheduleRepository;
+
+    @Transactional
+    public CreatResponse creatSchedule(CreatRequest request) {
+        Schedule schedule = new Schedule(
+                request.getWriter(),
+                request.getTitle(),
+                request.getContents(),
+                request.getPassword()
+        );
+
+        Schedule savedSchedule = scheduleRepository.save(schedule);
+
+        return new CreatResponse(
+                savedSchedule.getId(),
+                savedSchedule.getWriter(),
+                savedSchedule.getTitle(),
+                savedSchedule.getContents(),
+                savedSchedule.getCreatedAt(),
+                savedSchedule.getModifiedAt()
+        );
+    }
+}
