@@ -48,12 +48,19 @@
 ---
 ## 일정 조회
 
-### 전체 조회
+### 전체 or 작성자 조회
 
 - **Method** : GET
 - **URL** : `/schedules`
 - **Description**
-    - 모든 일정을 조회합니다.
+  - 전체 일정을 조회합니다.
+  - writer 값이 전달되면 해당 작성자의 일정만 조회합니다.
+
+### Query Parameter
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| writer | String | false | 작성자 이름 |
 
 ### Response
 
@@ -63,17 +70,15 @@
 
 #### Body
 
-```json
-[
-  {
-    "id": 1,
-    "writer": "작성자",
-    "title": "일정 제목",
-    "contents": "일정 내용",
-    "createdAt": "...",
-    "modifiedAt": "..."
-  }
-]
+```
+{
+"id": 1,
+"writer": "작성자",
+"title": "일정 제목",
+"contents": "일정 내용",
+"createdAt": "...",
+"modifiedAt": "..."
+}
 ```
 ---
 ## 일정 조회
