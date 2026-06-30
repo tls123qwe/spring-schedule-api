@@ -5,6 +5,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Entity
 @Table(name = "schedules")
@@ -20,13 +22,13 @@ public class Schedule extends LocalTime {
     private String contents;
     private String password;
 
-
     public Schedule(String writer, String title, String contents, String password) {
         this.writer = writer;
         this.title = title;
         this.contents = contents;
         this.password = password;
     }
+
 
     public void updateSchedule(String writer, String title, String contents) {
         this.writer = writer;
