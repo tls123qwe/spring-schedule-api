@@ -227,3 +227,16 @@
 | 204 No Content | 삭제 성공            |
 | 400 Bad Request | 비밀번호가 일치하지 않습니다. |
 | 404 Not Found | 없는 일정입니다.        |
+---
+
+## ERD
+
+| 컬럼명 | 타입           | 제약조건 | 설명 |
+|--------|--------------|---------|------|
+| id | BIGINT       | PK, AUTO_INCREMENT | 일정 고유 번호 |
+| writer | VARCHAR(100) | NOT NULL | 작성자 |
+| title | VARCHAR(200) | NOT NULL | 일정 제목 |
+| contents | TEXT         | NOT NULL | 일정 내용 |
+| password | VARCHAR(255) | NOT NULL | 수정 및 삭제 시 사용할 비밀번호 |
+| created_at | TIMESTAMP    | NOT NULL | 생성 일시 |
+| modified_at | TIMESTAMP     | NOT NULL | 수정 일시 |
