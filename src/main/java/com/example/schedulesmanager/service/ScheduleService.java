@@ -109,4 +109,17 @@ public class ScheduleService {
                 schedule.getCreatedAt(),
                 schedule.getModifiedAt());
     }
+
+    @Transactional
+    public void deleteSchedule(Long id, String password){
+        Schedule schedule = scheduleRepository.findById(id).orElseThrow(
+                () -> new IllegalStateException("없는 일정입니다."));
+
+        if (!schedule.getPassword().equals(password)) {
+            throw new IllegalArgumentException("비밀번호가 일지하지 않습니다.");
+        }
+
+        scheduleRepository.deleteById(id);
+
+    }
 }

@@ -36,9 +36,14 @@ public class scheduleController {
         return ResponseEntity.status(HttpStatus.OK).body(scheduleService.findByWriter(writer));
     }
 
-    @PutMapping("/schedlues/{id}")
+    @PutMapping("/schedules/{id}")
     public ResponseEntity<UpdateResponse> updateSchedule(@PathVariable Long id, @RequestBody UpdateRequest request){
         return ResponseEntity.status(HttpStatus.OK).body(scheduleService.updateSchedule(id, request));
     }
 
+    @DeleteMapping("/schedules/{id}")
+    public ResponseEntity<Void> deleteSchedule(@PathVariable Long id, @RequestBody DeleteRequest request) {
+        scheduleService.deleteSchedule(id, request.getPassword());
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }
